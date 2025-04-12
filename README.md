@@ -10,7 +10,7 @@
 🤖 Auto Apply – Automate applications using Selenium
 
 🛠️ Tech Stack
-###### Frontend: React.js
-###### Backend: Node.js, Express
-###### Database: MongoDB
-###### Extras: Selenium
+##### Frontend: React.js
+##### Backend: Node.js, Express
+##### Database: MongoDB
+##### Extras: Selenium
