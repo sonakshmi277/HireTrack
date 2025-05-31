@@ -3,8 +3,7 @@
 🚀 Key Features
 🔐 Authentication (JWT/Firebase) – Secure login and signup
 📄 Job CRUD – Create, update, delete, and view job applications
-🎯 Kanban Board – Visualize your application stages (e.g., Applied, Interviewing, Offer)
-⏰ Reminders – Get notified of deadlines and follow-ups (Cron Jobs/Firebase Messaging)
+⏰ Reminders – Get notified of deadlines and follow-ups
 📊 Analytics Dashboard – Insights on your job search with charts (Recharts/Chart.js)
 🔍 Search & Filter – Quickly locate applications based on status, company, etc.
 🤖 Auto Apply – Automate applications using Selenium
