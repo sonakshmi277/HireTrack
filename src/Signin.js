@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 export default function SignInPage() {
   const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
+  useEffect(() => {
+    const saveUserDetails = async () => {
+      if (!user) return;
+
+      try {
+        await axios.post("http://localhost:5000/task_save", {
+          email: user.email,
+          fullName: user.name,
+        });
+        console.log("Details saved successfully");
+      } catch (error) {
+        console.log("Error saving details:", error);
+      }
+    };
+
+    if (isAuthenticated) {
+      saveUserDetails();
+    }
+  }, [isAuthenticated, user]);
 
   const handleLogin = (role) => {
     loginWithRedirect({

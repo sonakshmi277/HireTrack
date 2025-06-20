@@ -2,7 +2,7 @@ import './App.css';
 import Frontpg from './frontpg';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from './Signin';
-import Dashboard from './dashboard';
+import Dashboard from './Dashboard';
 import Admindash from './admindash';
 import PostNew from './postNew';
 import JobPosted from './jobPosted';

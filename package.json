@@ -10,8 +10,13 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.10.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.3",
+    "mongoose": "^8.16.0",
+    "nodemon": "^3.1.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.0",
@@ -42,5 +47,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "📌 Hiretrack – Job Application Tracker Hiretrack is a full-stack web application designed to simplify and streamline your job search journey. Track applications, manage deadlines, and stay on top of every opportunity — all in one place.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

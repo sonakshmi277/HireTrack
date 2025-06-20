@@ -1,6 +1,6 @@
 body,html{
   padding: 0px;
-  border: 0px;
+  margin:0;
   height: 100%;
   overflow: hidden;
   background-color: pink;
@@ -262,49 +262,76 @@ button:hover {
 .nav-mes{
   height: 100%;
   width: 20%;
+  display: flex;
+  flex-direction: column;
   background-color: #111827;
   color: wheat;
-
-  
 }
 .mes-box{
   width: 80%;
   height:100%;
   background-color: #3b82f6;
   color: wheat;
+  padding:20px;
+  box-sizing:border-box;
 }
 .upper-con-nav{
-  height: 5%;
+  padding: 15px 13px;
   display: flex;
+  align-items: center;
   
+}
+.upper-con-nav h2{
+  margin:0;
 }
 .search-user{
-  display:flex;
-  height:10%;
-  align-items: center;
-  margin-bottom:20%;
-  margin-top: 7px;
+  height:60px;
   background-color: #15803d;
-  
-}
-.icon-nav {
+  display:flex;
+  align-items: center;
+  padding: 0 12px;
+  gap:10px;
 
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  flex-grow:1;
+}
+
+.icon-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
+  width: 40px;
+  height:40px;
+  border-radius:5px;
+  flex-shrink: 0;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .icon-nav:hover {
   background-color: pink;
   cursor: pointer;
-  transform: scale(1.05);
+  
 }
+.icon-nav .svg-inline--fa{
+  font-size:27px;
+  color:wheat;
+}
+
 .chat-Bars{
-  background-color: #15803d;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  background-color: #29ac5b;
   height: 120px;
- 
+}
+.chart-Bars h3{
+  margin: 0;
+  color: white;
 }
 .first{
   height:50vh;
