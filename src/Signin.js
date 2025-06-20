@@ -48,7 +48,7 @@ export default function SignInPage() {
       ) : (
         <div style={styles.card}>
           <h2 style={styles.heading}>Welcome, {user.name}!</h2>
-          <p>You are now signed in ✅</p>
+          <p>You are now signed in</p>
           <button
             style={styles.logout}
             onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
