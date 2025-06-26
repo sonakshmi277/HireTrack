@@ -7,11 +7,10 @@ export default function SignInPage() {
   useEffect(() => {
     const saveUserDetails = async () => {
       if (!user) return;
-
       try {
         await axios.post("http://localhost:5000/task_save", {
           email: user.email,
-          fullName: user.name,
+          fullName: user.name
         });
         console.log("Details saved successfully");
       } catch (error) {
