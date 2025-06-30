@@ -17,9 +17,7 @@ export default function Admindash() {
             <h5 onClick={() => navigate("/dashboard")}>Dashboard</h5>
             <h5 onClick={() => navigate("/postNew")}>Post New Job</h5>
             <h5 onClick={() => navigate("/jobPosted")}>Jobs Posted</h5>
-            <h5 onClick={() => navigate("/")}>Applicant Details</h5>
             <h5 onClick={() => navigate("/message")}>Messages</h5>
-            <h5 onClick={() => navigate("/")}>Settings</h5>
           </div>
         )}
       </div>

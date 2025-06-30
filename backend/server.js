@@ -1,36 +1,61 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
-const { Server } = require("socket.io");
 const cors = require("cors");
 const http = require("http");
-const server = http.createServer(app);
+const { Server } = require("socket.io");
 const Admin = require("./models/admin");
 const Message = require("./models/message");
-const User = require("./models/user"); 
+const User = require("./models/user");
 const userRoutes = require("./routes/userRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
-app.use(express.json());
-app.use(
-  cors({
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"]
-  })
-);
-
-app.use(userRoutes);
-
-server.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+  }
 });
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/chat", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((error) => console.error("MongoDB Connection Error:", error));
+const userSockets = new Map(); 
+
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("registerUser", (userId) => {
+    userSockets.set(userId, socket.id);
+    console.log(`User ${userId} registered with socket ${socket.id}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
+    for (let [userId, socketId] of userSockets.entries()) {
+      if (socketId === socket.id) {
+        userSockets.delete(userId);
+        console.log(`User ${userId} unregistered.`);
+        break;
+      }
+    }
+  });
+});
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+  credentials: true
+}));
+app.use(express.json());
+
+app.use((req, res, next) => {
+  req.io = io;
+  req.userSockets = userSockets;
+  next();
+});
+
+app.use('/api', userRoutes);
+app.use('/api', messageRoutes);
 
 app.post("/task_save", async (req, res) => {
   try {
@@ -42,4 +67,15 @@ app.post("/task_save", async (req, res) => {
     console.error("Error saving to DB:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+mongoose
+  .connect("mongodb://127.0.0.1:27017/chat", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((error) => console.error("MongoDB Connection Error:", error));
+
+server.listen(5000, () => {
+  console.log("Server running on http://localhost:5000");
 });
