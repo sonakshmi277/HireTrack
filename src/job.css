@@ -1,0 +1,90 @@
+/* ============================== */
+/* ===== JOB POSTED PAGE ONLY ==== */
+/* ============================== */
+
+.job-posted-container {
+  max-width: 900px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+.job-posted-header,
+.job-posted-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  padding: 16px 20px;
+  align-items: center;
+}
+
+.job-posted-header {
+  background-color: #111827;
+  color: #f9fafb;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.job-posted-row {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.3s;
+}
+
+.job-posted-row:last-child {
+  border-bottom: none;
+}
+
+.job-posted-row:hover {
+  background: #f9fafb;
+}
+
+.view-btn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.view-btn:hover {
+  background: #2563eb;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modalContent {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.modalContent h2 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.modalActions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}

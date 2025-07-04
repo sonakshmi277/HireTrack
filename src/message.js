@@ -256,7 +256,7 @@ export default function Message() {
           </>
         ) : (
           <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5em', color: '#6c757d' }}>
-            Select a user to start chatting! 💬
+            Select a user to start chatting! 
           </div>
         )}
       </div>

@@ -1,0 +1,193 @@
+/* src/Frontpg.css or append to src/common.css */
+
+/* General Page Layout */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    background-color: #eef2f6; /* Light, calming background */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in element's total width/height */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+}
+
+/* Sign-in Card Styling */
+.signin-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, deeper shadow */
+    padding: 40px;
+    max-width: 480px; /* Max width for larger screens */
+    width: 100%; /* Take full width on smaller screens */
+    text-align: center;
+    transform: translateY(0); /* Initial state for animation */
+    animation: fadeInScale 0.5s ease-out forwards; /* Simple entrance animation */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Headings and Messages */
+.welcome-heading {
+    color: #2c3e50; /* Darker text for headings */
+    font-size: 2.2em; /* Larger heading */
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.welcome-message, .signup-prompt {
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.signup-prompt {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #e0e0e0; /* A subtle separator */
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.signed-in-message {
+    color: #28a745; /* Green for success message */
+    font-size: 1.1em;
+    margin-bottom: 25px;
+}
+
+/* Button Group Layout */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 20px;
+}
+
+/* General Button Styling */
+.auth-button, .logout-button, .dashboard-link-button {
+    padding: 15px 25px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%; /* Full width */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.auth-button:hover, .logout-button:hover, .dashboard-link-button:hover {
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    opacity: 0.9;
+}
+
+/* Specific Button Colors */
+.admin-button {
+    background-color: #3498db; /* Professional blue */
+    color: white;
+}
+.admin-button:hover {
+    background-color: #2980b9;
+}
+
+.jobseeker-button {
+    background-color: #2ecc71; /* Vibrant green */
+    color: white;
+}
+.jobseeker-button:hover {
+    background-color: #27ae60;
+}
+
+.signup-button { /* Applied to both admin and jobseeker signup buttons */
+    background-color: #9b59b6; /* Purple for signup actions */
+    color: white;
+}
+.signup-button:hover {
+    background-color: #8e44ad;
+}
+
+.logout-button {
+    background-color: #e74c3c; /* Red for logout */
+    color: white;
+    margin-top: 20px; /* Space above logout button */
+}
+.logout-button:hover {
+    background-color: #c0392b;
+}
+
+.dashboard-link-button {
+    background-color: #f39c12; /* Orange for dashboard link */
+    color: white;
+    margin-top: 15px;
+}
+.dashboard-link-button:hover {
+    background-color: #e67e22;
+}
+
+/* Loading Spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f4f8;
+    color: #2c3e50;
+    font-size: 1.2em;
+}
+
+.spinner {
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #3498db; /* Blue spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite; /* Spin animation */
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .signin-card {
+        padding: 30px 20px;
+        margin: 15px; /* Add some margin on very small screens */
+    }
+    .welcome-heading {
+        font-size: 1.8em;
+    }
+    .welcome-message, .signup-prompt, .signed-in-message {
+        font-size: 0.95em;
+    }
+    .auth-button, .logout-button, .dashboard-link-button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 400px) {
+    .signin-card {
+        padding: 25px 15px;
+    }
+    .welcome-heading {
+        font-size: 1.5em;
+    }
+    .button-group {
+        gap: 10px;
+    }
+}

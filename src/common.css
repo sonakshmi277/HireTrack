@@ -17,16 +17,14 @@ body,html{
     height: 100%;
     margin-left: 30vw;
     margin-top: 15vh;
-    
-
 }
+
 .shown {
     background-color: #1f2937;
     height: 100%;
     width: 12%;
     color: white;
-  
-  }
+}
 .toggle-btn{
   margin-left: 10%;
 }
@@ -40,7 +38,7 @@ body,html{
     margin: 20px auto;
     padding: 0 20px;
     max-width: 1100px;
-  }
+}
   
 .box1,.box2,.box3,.box4 {
     background-color: #ffffff;
@@ -49,7 +47,7 @@ body,html{
     flex: 1 1 200px;
     padding: 20px;
     text-align: center;
-  }
+}
  
 .recent-applications {
     background-color: #ffffff;
@@ -60,32 +58,32 @@ body,html{
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
-  }
+}
   
 .recent-applications h2 {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
     color: #111827;
-  }
+}
 .recent-applications table {
     width: 100%;
     border-collapse: collapse;
-  }
+}
   
 .recent-applications th,.recent-applications td {
     text-align: left;
     padding: 14px 18px;
     border-bottom: 1px solid #e5e7eb;
     font-size: 15px;
-  }
+}
   
 .recent-applications th {
     color: #6b7280;
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 0.05em;
-  }
+}
   
 .status {
     display: inline-block;
@@ -93,28 +91,28 @@ body,html{
     font-size: 12px;
     border-radius: 999px;
     font-weight: 600;
-  }
+}
   
 .status.pending {
     background-color: #fef08a;
     color: #92400e;
-  }
+}
   
 .status.accepted {
     background-color: #bbf7d0;
     color: #15803d;
-  }
+}
   
 .status.rejected {
     background-color: #fecaca;
     color: #b91c1c;
-  }
+}
   
 .recent-applications a {
     color: #3b82f6;
     text-decoration: none;
     font-weight: 500;
-  }
+}
 .Mainn{
   height: 100%;
   width:100%;
@@ -254,7 +252,6 @@ button:hover {
   justify-content: space-between;
 }
 
-
 .outer-div-mes{
   height: 100vh;
   display: flex;
@@ -335,4 +332,165 @@ button:hover {
 }
 .first{
   height:50vh;
+}
+
+/* ============================== */
+/* ==== NEW ADMIN DASHBOARD ====  */
+/* ============================== */
+
+.admin-main {
+  display: flex;
+  height: 100vh;
+  background-color: #f9fafb;
+}
+
+.admin-sidebar {
+  width: 220px;
+  background-color: #111827;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s;
+}
+
+.admin-sidebar-collapsed {
+  width: 70px;
+  background-color: #111827;
+  padding-top: 20px;
+  transition: width 0.3s;
+}
+
+.admin-toggle-btn {
+  background: none;
+  border: none;
+  color: #f9fafb;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.admin-menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+.admin-menu-items h5 {
+  color: #f9fafb;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 12px 0;
+}
+
+.admin-menu-items h5:hover {
+  background-color: #1f2937;
+  color: #3b82f6;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.admin-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.admin-box {
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.admin-box h2 {
+  margin-bottom: 12px;
+  color: #1f2937;
+  font-size: 20px;
+}
+
+.admin-box h4 {
+  font-size: 28px;
+  color: #3b82f6;
+}
+
+.admin-table-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+.admin-table-container h2 {
+  margin-bottom: 20px;
+  color: #1f2937;
+  font-size: 22px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+}
+
+.admin-table th {
+  color: #6b7280;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 14px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.status.pending {
+  background-color: #fef08a;
+  color: #92400e;
+}
+
+.status.accepted {
+  background-color: #bbf7d0;
+  color: #15803d;
+}
+
+.status.rejected {
+  background-color: #fecaca;
+  color: #b91c1c;
+}
+
+.admin-table a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.admin-table a:hover {
+  text-decoration: underline;
 }

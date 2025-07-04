@@ -7,43 +7,44 @@ export default function Admindash() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="main1">
-      <div className={`${isCollapsed ? "collapsed" : "shown"}`}>
-        <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+    <div className="admin-main">
+      <div className={`${isCollapsed ? "admin-sidebar-collapsed" : "admin-sidebar"}`}>
+        <button className="admin-toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
           {!isCollapsed ? "☰" : "✖"}
         </button>
         {!isCollapsed && (
-          <div className="menu-items">
-            <h5 onClick={() => navigate("/dashboard")}>Dashboard</h5>
+          <div className="admin-menu-items">
+            <h5 onClick={() => navigate("/admindash")}>Dashboard</h5>
             <h5 onClick={() => navigate("/postNew")}>Post New Job</h5>
             <h5 onClick={() => navigate("/jobPosted")}>Jobs Posted</h5>
             <h5 onClick={() => navigate("/message")}>Messages</h5>
           </div>
         )}
       </div>
-      <div className="main-content1">
-        <div className="boxes">
-          <div className="box1">
+
+      <div className="admin-content">
+        <div className="admin-boxes">
+          <div className="admin-box">
             <h2>Total Job Applications</h2>
             <h4>120</h4>
           </div>
-          <div className="box2">
+          <div className="admin-box">
             <h2>Active Users</h2>
             <h4>50</h4>
           </div>
-          <div className="box3">
+          <div className="admin-box">
             <h2>Jobs Posted</h2>
             <h4>25</h4>
           </div>
-          <div className="box4">
+          <div className="admin-box">
             <h2>Application</h2>
             <h4>Trends</h4>
           </div>
         </div>
 
-        <div className="recent-applications">
+        <div className="admin-table-container">
           <h2>Recent Job Applications</h2>
-          <table>
+          <table className="admin-table">
             <thead>
               <tr>
                 <th>Applicant</th>
@@ -87,8 +88,6 @@ export default function Admindash() {
           </table>
         </div>
       </div>
-      
     </div>
-    
   );
 }

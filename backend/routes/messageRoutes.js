@@ -38,7 +38,7 @@ router.post("/messages", async (req, res) => {
     const receiverSocketId = req.userSockets.get(receiverId);
     if (receiverSocketId) {
       req.io.to(receiverSocketId).emit("receiveMessage", message);
-      console.log(`📤 Emitted message to ${receiverSocketId}`);
+      console.log(`Emitted message to ${receiverSocketId}`);
     }
 
     res.json(message);

@@ -1,16 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import html2pdf from "html2pdf.js";
+import "./job.css";
 
 export default function JobPosted() {
+  const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const modalRef = useRef();
 
-  const jobData = [
-    { title: "Frontend Developer", company: "ABC Corp" },
-    { title: "Backend Developer", company: "XYZ Pvt Ltd" },
-    { title: "Full Stack Engineer", company: "TechNova" },
-    { title: "DevOps Specialist", company: "CloudSync" },
-  ];
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/job");
+        if (!res.ok) throw new Error("Failed to fetch jobs");
+        const data = await res.json();
+        setJobs(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   const handleDownload = () => {
     const element = modalRef.current;
@@ -18,38 +32,44 @@ export default function JobPosted() {
   };
 
   return (
-    <div className="jobDiv1">
-      <div className="TotBox">
-        <div className="Boxes Header">
-          <div className="BoxesB"><h5>Job Title</h5></div>
-          <div className="BoxesB"><h5>Company Name</h5></div>
-          <div className="BoxesB"><h5>Click to View Details</h5></div>
-        </div>
-
-        {jobData.map((job, index) => (
-          <div className="Boxes" key={index}>
-            <div className="BoxesB"><p>{job.title}</p></div>
-            <div className="BoxesB"><p>{job.company}</p></div>
-            <div className="BoxesB">
-              <p>
-                <button
-                  onClick={() => setSelectedJob(job)}
-                  style={{ color: "blue", border: "none", background: "none", cursor: "pointer" }}
-                >
-                  View
-                </button>
-              </p>
-            </div>
-          </div>
-        ))}
+    <div className="job-posted-container">
+      <div className="job-posted-header">
+        <div>Job Title</div>
+        <div>Company</div>
+        <div>View Details</div>
       </div>
+
+      {loading && <p style={{ textAlign: "center" }}>Loading jobs...</p>}
+      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+
+      {!loading && !error && jobs.length === 0 && (
+        <p style={{ textAlign: "center" }}>No jobs posted yet.</p>
+      )}
+
+      {jobs.map((job, index) => (
+        <div className="job-posted-row" key={index}>
+          <div>{job.title}</div>
+          <div>{job.company}</div>
+          <div>
+            <button className="view-btn" onClick={() => setSelectedJob(job)}>
+              View
+            </button>
+          </div>
+        </div>
+      ))}
+
       {selectedJob && (
         <div className="modalOverlay">
           <div className="modalContent" ref={modalRef}>
             <h2>Job Details</h2>
             <p><strong>Title:</strong> {selectedJob.title}</p>
             <p><strong>Company:</strong> {selectedJob.company}</p>
-            <p><strong>Description:</strong> This is a sample job description.</p>
+            <p><strong>Location:</strong> {selectedJob.location}</p>
+            <p><strong>Salary:</strong> {selectedJob.salary}</p>
+            <p><strong>Type:</strong> {selectedJob.type}</p>
+            <p><strong>Deadline:</strong> {selectedJob.deadline}</p>
+            <p><strong>Skills:</strong> {selectedJob.skills}</p>
+            <p><strong>Description:</strong> {selectedJob.description}</p>
             <div className="modalActions">
               <button onClick={handleDownload}>Download PDF</button>
               <button onClick={() => setSelectedJob(null)}>Close</button>

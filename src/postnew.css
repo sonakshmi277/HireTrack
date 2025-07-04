@@ -1,0 +1,85 @@
+/* ============================== */
+/* ===== POST NEW JOB PAGE ======= */
+/* ============================== */
+
+.postnew-container {
+    width: 50vw;
+    margin: 60px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.form-title {
+    text-align: center;
+    color: #0a2a5e; /* Navy blue */
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.job-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #0a2a5e;
+}
+
+input,
+select,
+textarea {
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    transition: 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #0a2a5e;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(10, 42, 94, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    background-color: #0a2a5e; /* Navy blue */
+    color: #ffffff;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #103c82;
+}
+html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+}
