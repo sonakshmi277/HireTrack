@@ -1,28 +1,24 @@
-/* src/Frontpg.css or append to src/common.css */
-
-/* General Page Layout */
 .signin-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    background-color: #eef2f6; /* Light, calming background */
+    min-height: 100vh; 
+    background-color: #eef2f6; 
     padding: 20px;
-    box-sizing: border-box; /* Include padding in element's total width/height */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
-/* Sign-in Card Styling */
 .signin-card {
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, deeper shadow */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
     padding: 40px;
-    max-width: 480px; /* Max width for larger screens */
-    width: 100%; /* Take full width on smaller screens */
+    max-width: 480px; 
+    width: 100%; 
     text-align: center;
-    transform: translateY(0); /* Initial state for animation */
-    animation: fadeInScale 0.5s ease-out forwards; /* Simple entrance animation */
+    transform: translateY(0); 
+    animation: fadeInScale 0.5s ease-out forwards; 
 }
 
 @keyframes fadeInScale {
@@ -35,11 +31,9 @@
         transform: translateY(0) scale(1);
     }
 }
-
-/* Headings and Messages */
 .welcome-heading {
-    color: #2c3e50; /* Darker text for headings */
-    font-size: 2.2em; /* Larger heading */
+    color: #2c3e50; 
+    font-size: 2.2em; 
     margin-bottom: 10px;
     font-weight: 700;
 }
@@ -54,26 +48,24 @@
 .signup-prompt {
     margin-top: 35px;
     padding-top: 25px;
-    border-top: 1px solid #e0e0e0; /* A subtle separator */
+    border-top: 1px solid #e0e0e0; 
     font-weight: 600;
     color: #4a4a4a;
 }
 
 .signed-in-message {
-    color: #28a745; /* Green for success message */
+    color: #28a745;
     font-size: 1.1em;
     margin-bottom: 25px;
 }
 
-/* Button Group Layout */
 .button-group {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
     margin-bottom: 20px;
 }
 
-/* General Button Styling */
 .auth-button, .logout-button, .dashboard-link-button {
     padding: 15px 25px;
     font-size: 1.1em;
@@ -82,19 +74,18 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%; /* Full width */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
 .auth-button:hover, .logout-button:hover, .dashboard-link-button:hover {
-    transform: translateY(-3px); /* Lift effect on hover */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); 
     opacity: 0.9;
 }
 
-/* Specific Button Colors */
 .admin-button {
-    background-color: #3498db; /* Professional blue */
+    background-color: #3498db; 
     color: white;
 }
 .admin-button:hover {
@@ -102,15 +93,15 @@
 }
 
 .jobseeker-button {
-    background-color: #2ecc71; /* Vibrant green */
+    background-color: #2ecc71; 
     color: white;
 }
 .jobseeker-button:hover {
     background-color: #27ae60;
 }
 
-.signup-button { /* Applied to both admin and jobseeker signup buttons */
-    background-color: #9b59b6; /* Purple for signup actions */
+.signup-button { 
+    background-color: #9b59b6; 
     color: white;
 }
 .signup-button:hover {
@@ -118,24 +109,22 @@
 }
 
 .logout-button {
-    background-color: #e74c3c; /* Red for logout */
+    background-color: #e74c3c; 
     color: white;
-    margin-top: 20px; /* Space above logout button */
+    margin-top: 20px; 
 }
 .logout-button:hover {
     background-color: #c0392b;
 }
 
 .dashboard-link-button {
-    background-color: #f39c12; /* Orange for dashboard link */
+    background-color: #f39c12; 
     color: white;
     margin-top: 15px;
 }
 .dashboard-link-button:hover {
     background-color: #e67e22;
 }
-
-/* Loading Spinner */
 .loading-container {
     display: flex;
     flex-direction: column;
@@ -149,11 +138,11 @@
 
 .spinner {
     border: 5px solid rgba(0, 0, 0, 0.1);
-    border-top-color: #3498db; /* Blue spinner */
+    border-top-color: #3498db; 
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    animation: spin 1s linear infinite; /* Spin animation */
+    animation: spin 1s linear infinite; 
     margin-bottom: 20px;
 }
 
@@ -161,12 +150,10 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-/* Responsive Adjustments */
 @media (max-width: 600px) {
     .signin-card {
         padding: 30px 20px;
-        margin: 15px; /* Add some margin on very small screens */
+        margin: 15px; 
     }
     .welcome-heading {
         font-size: 1.8em;

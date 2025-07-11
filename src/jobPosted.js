@@ -12,7 +12,7 @@ export default function JobPosted() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/job");
+        const res = await fetch("http://localhost:5000/api/jobs");
         if (!res.ok) throw new Error("Failed to fetch jobs");
         const data = await res.json();
         setJobs(data);

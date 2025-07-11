@@ -8,16 +8,36 @@ export default function Frontpg() {
   const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();
 
+  const handleAuth = (role, screenHint = 'login') => {
+    localStorage.setItem("selectedRole", role); 
+    loginWithRedirect({
+      appState: { role: role },
+      authorizationParams: {
+        screen_hint: screenHint, 
+      },
+    });
+  };
+
   useEffect(() => {
     const saveUserDetails = async () => {
       if (!user || !user.email) return; 
 
+      const role = localStorage.getItem("selectedRole") || "job_searcher";
+
       try {
         const response = await axios.post("http://localhost:5000/task_save", {
           email: user.email,
-          fullName: user.name || user.nickname || "User", 
+          fullName: user.name || user.nickname || "User",
+          role: role
         });
         console.log("User details saved successfully:", response.data);
+
+        if (role === "admin") {
+          navigate("/admindash");
+        } else if (role === "job_searcher") {
+          navigate("/userDashboard");
+        }
+
       } catch (error) {
         console.error("Error saving user details to backend:", error.response ? error.response.data : error.message);
       }
@@ -26,15 +46,7 @@ export default function Frontpg() {
     if (isAuthenticated) {
       saveUserDetails();
     }
-  }, [isAuthenticated, user]); 
-  const handleAuth = (role, screenHint = 'login') => {
-    loginWithRedirect({
-      appState: { role: role },
-      authorizationParams: {
-        screen_hint: screenHint, 
-      },
-    });
-  };
+  }, [isAuthenticated, user, navigate]); 
 
   if (isLoading) {
     return (
@@ -65,11 +77,11 @@ export default function Frontpg() {
             New here? Join us!
           </p>
           <div className="button-group">
-             <button className="auth-button signup-button" onClick={() => handleAuth("admin", "signup")}>
-                Sign Up as Admin 
+            <button className="auth-button signup-button" onClick={() => handleAuth("admin", "signup")}>
+              Sign Up as Admin 
             </button>
             <button className="auth-button signup-button" onClick={() => handleAuth("job_searcher", "signup")}>
-                Sign Up as Job Seeker 
+              Sign Up as Job Seeker 
             </button>
           </div>
         </div>
@@ -85,7 +97,14 @@ export default function Frontpg() {
           </button>
           <button
             className="dashboard-link-button"
-            onClick={() => navigate("/admindash")} 
+            onClick={() => {
+              const role = localStorage.getItem("selectedRole");
+              if (role === "admin") {
+                navigate("/admindash");
+              } else {
+                navigate("/userDashboard");
+              }
+            }}
           >
             Go to Dashboard 
           </button>

@@ -7,7 +7,8 @@ import PostNew from './postNew';
 import JobPosted from './jobPosted';
 import Message from './message';
 import Signup from "./Signup";
-import JobSeekerFirstPg from "./jobSeekerFirstpg";
+import UserDashboard from "./userDashboard";
+import ApplyNew from "./applyNew";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/jobPosted" element={<JobPosted/>}/>  
         <Route path="/message" element={<Message/>}/>
         <Route path="/Signup" element={<Signup/>}/>
-        <Route path="/jobSeekerFirstPg" element={<JobSeekerFirstPg/>}/>
+        <Route path="/userDashboard" element={<UserDashboard/>}/>
+         <Route path="/applyNew" element={<ApplyNew/>}/>
         </Routes>
     </Router>
   );
