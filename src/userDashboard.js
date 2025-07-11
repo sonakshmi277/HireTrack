@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 import "./common.css";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
-  const { logout } = useAuth0(); 
+  const { user, logout } = useAuth0(); 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [applications, setApplications] = useState([]);
+  useEffect(() => {
+    if (user) {
+      axios.post("http://localhost:5000/api/register", {
+        email: user.email,
+        fullName: user.name
+      })
+      .then(res => console.log("Registered / existing jobseeker:", res.data))
+      .catch(err => console.error("Registration failed:", err));
+    }
+  }, [user]);
 
   useEffect(() => {
     fetchUserApplications();
@@ -15,7 +26,7 @@ export default function UserDashboard() {
 
   const fetchUserApplications = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/userApplications?email=sonakshmib@gmail.com");
+      const res = await fetch(`http://localhost:5000/api/userApplications?email=${user?.email || "sonakshmib@gmail.com"}`);
       if (!res.ok) throw new Error("Failed to fetch applications");
       const data = await res.json();
       setApplications(data);
@@ -34,7 +45,7 @@ export default function UserDashboard() {
           <div className="admin-menu-items">
             <h5 onClick={() => navigate("/userDashboard")}>Dashboard</h5>
             <h5 onClick={() => navigate("/applyNew")}>Apply</h5>
-            <h5 onClick={() => navigate("/message")}>Messages</h5>
+            <h5 onClick={() => navigate("/jobSeekerMessages")}>Messages</h5>
             <h5
               style={{ color: "red", cursor: "pointer" }}
               onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}

@@ -3,11 +3,43 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const http = require("http");
+const { Server } = require("socket.io");
 const Job = require("./models/job");
 const Application = require("./models/application");
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
 
+// Store user socket connections for chat
+const userSockets = new Map();
+
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
+
+  socket.on("register", (userId) => {
+    userSockets.set(userId, socket.id);
+    console.log(`Registered user ${userId} with socket ${socket.id}`);
+  });
+
+  socket.on("disconnect", () => {
+    for (let [userId, sockId] of userSockets.entries()) {
+      if (sockId === socket.id) {
+        userSockets.delete(userId);
+        break;
+      }
+    }
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
+// Middlewares
 app.use(cors({
   origin: "http://localhost:3000",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -15,11 +47,16 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Pass io + userSockets to requests
+app.use((req, res, next) => {
+  req.io = io;
+  req.userSockets = userSockets;
+  next();
+});
 
+// Multer
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "uploads/");
@@ -30,6 +67,8 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
+
+// DB
 mongoose
   .connect("mongodb://127.0.0.1:27017/chat", {
     useNewUrlParser: true,
@@ -38,6 +77,7 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Error:", err));
 
+// Your existing routes
 app.post("/api/job", async (req, res) => {
   try {
     const job = await Job.create(req.body);
@@ -61,7 +101,6 @@ app.get("/api/jobs", async (req, res) => {
 app.post("/api/apply", upload.single("resume"), async (req, res) => {
   try {
     const { name, email, age, education, jobId } = req.body;
-
     if (!name || !email || !age || !education || !jobId || !req.file) {
       return res.status(400).json({ error: "All fields are required" });
     }
@@ -108,6 +147,7 @@ app.put("/api/applications/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update status" });
   }
 });
+
 app.get("/api/userApplications", async (req, res) => {
   try {
     const email = req.query.email;
@@ -124,8 +164,10 @@ app.get("/api/userApplications", async (req, res) => {
   }
 });
 
+// ✅ Mount userRoutes at /api so /api/user_search works
+const userRoutes = require("./routes/userRoutes");
+app.use("/api", userRoutes);
 
-
-app.listen(5000, () => {
+server.listen(5000, () => {
   console.log("Server running at http://localhost:5000");
 });

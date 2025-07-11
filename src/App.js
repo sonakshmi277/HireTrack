@@ -9,6 +9,7 @@ import Message from './message';
 import Signup from "./Signup";
 import UserDashboard from "./userDashboard";
 import ApplyNew from "./applyNew";
+import JobSeekerMessages from "./jobSeekerMessages";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/message" element={<Message/>}/>
         <Route path="/Signup" element={<Signup/>}/>
         <Route path="/userDashboard" element={<UserDashboard/>}/>
-         <Route path="/applyNew" element={<ApplyNew/>}/>
+        <Route path="/applyNew" element={<ApplyNew/>}/>
+        <Route path="/jobSeekerMessages" element={<JobSeekerMessages/>}/>
         </Routes>
     </Router>
   );
