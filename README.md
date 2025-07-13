@@ -16,7 +16,8 @@ Track applications, manage your resumes, chat with admins, and even automate par
 | **Multi-User Support** | Many jobseekers can use this platform simultaneously (1 admin for now)    |
 
 
-🛠️ Tech Stack
+
+## Tech Stack
 #### Frontend: React.js
 #### Backend: Node.js, Express.js
 #### Database: MongoDB
