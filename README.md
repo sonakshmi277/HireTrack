@@ -13,7 +13,7 @@ Track applications, manage your resumes, chat with admins, and even automate par
 | **Admin Dashboard**    | Admin reviews applications & updates status                 |
 | **Real-Time Chat**     | Chat between applicants & admin powered by Socket.IO         |
 | **Automation**         | Selenium auto-fills & streamlines application submissions   |
-| **Multi-User Support** | Many jobseekers can this platform simultaneously (1 admin for now)    |
+| **Multi-User Support** | Many jobseekers can use this platform simultaneously (1 admin for now)    |
 
 
 🛠️ Tech Stack
