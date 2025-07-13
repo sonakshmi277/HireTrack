@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
 import "./applynew.css"; 
 
 export default function ApplyNew() {
   const [jobs, setJobs] = useState([]);
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     age: "",
     education: "",
     jobId: "",
-    resume: null
+    resume: null,
+    updateExisting: false 
   });
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/jobs")
       .then(res => setJobs(res.data))
       .catch(err => console.error("Error fetching jobs:", err));
-  }, []);
+
+    if (location.state) {
+      if (location.state.mode === 'update' && location.state.userData) {
+        const { userData } = location.state;
+        setFormData(prev => ({
+          ...prev,
+          name: userData.Name || "",
+          email: userData.Email || "",
+          age: userData.Age ? userData.Age.toString() : "",
+          education: userData.Education || "",
+          updateExisting: true 
+        }));
+      } else if (location.state.mode === 'new') {
+      }
+    }
+  }, [location]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -30,23 +48,46 @@ export default function ApplyNew() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
     data.append("age", formData.age);
     data.append("education", formData.education);
     data.append("jobId", formData.jobId);
-    data.append("resume", formData.resume);
+    if (formData.resume) {
+      data.append("resume", formData.resume);
+    }
+    data.append("updateExisting", formData.updateExisting ? "true" : "false"); 
 
     try {
-      await axios.post("http://localhost:5000/api/apply", data, {
-        headers: { "Content-Type": "multipart/form-data" }
+      const response = await axios.post("http://localhost:5000/api/apply", data, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("Application submitted successfully!");
-      setFormData({ name: "", email: "", age: "", education: "", jobId: "", resume: null });
+
+      if (response.status === 200 || response.status === 201) { 
+        const contentType = response.headers['content-type'];
+        if (contentType && contentType.includes('application/json')) {
+            const responseJson = response.data;
+            alert(responseJson.message || "Application submitted successfully!");
+        } else {
+            alert("Application submitted successfully!");
+        }
+      } else {
+          const errorText = response.data?.error || "Unknown error during submission.";
+          alert(`Application failed: ${errorText}`);
+      }
+      
+      setFormData({ name: "", email: "", age: "", education: "", jobId: "", resume: null, updateExisting: false });
+
     } catch (err) {
-      console.error("Apply failed:", err);
-      alert("Failed to apply. Try again.");
+      console.error("Apply failed in handleSubmit:", err);
+      if (err.response) {
+          const errorMessage = err.response.data?.error || err.message || 'Unknown error';
+          alert(`Application failed: ${errorMessage}`);
+      } else {
+          alert("An unexpected error occurred. Please try again. Check console for details.");
+      }
     }
   };
 
@@ -104,7 +145,7 @@ export default function ApplyNew() {
           name="resume"
           accept=".pdf,.doc,.docx"
           onChange={handleChange}
-          required
+          required={!formData.updateExisting || (formData.updateExisting && !formData.resume)}
         />
         <button type="submit">Submit Application</button>
       </form>

@@ -1,27 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 import "./common.css";
 
 export default function Admindash() {
   const navigate = useNavigate();
-  const { logout } = useAuth0();  
+  const { logout } = useAuth0();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [applications, setApplications] = useState([]);
-
-  useEffect(() => {
-    fetchApplications();
-  }, []);
-
-  const fetchApplications = async () => {
+  const [totalJobsPostedCount, setTotalJobsPostedCount] = useState(0);
+  const [pendingReviewCount, setPendingReviewCount] = useState(0);
+  const fetchApplications = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:5000/api/applications");
+      if (!response.ok) throw new Error("Failed to fetch applications");
       const data = await response.json();
       setApplications(data);
+      setPendingReviewCount(data.filter(app => app.status === 'Pending').length);
+
     } catch (err) {
       console.error("Error fetching applications:", err);
+      setApplications([]); 
+      setPendingReviewCount(0);
     }
-  };
+  }, []); 
+  useEffect(() => {
+    const fetchTotalJobsPosted = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/jobs/count');
+        if (res.status !== 200) throw new Error("Failed to fetch jobs posted count");
+        setTotalJobsPostedCount(res.data.count); 
+      } catch (err) {
+        console.error("Error fetching total jobs posted:", err.message);
+        setTotalJobsPostedCount(0); 
+      }
+    };
+    fetchTotalJobsPosted();
+  }, []); 
+  useEffect(() => {
+    fetchApplications();
+  }, [fetchApplications]);
 
   const updateStatus = async (id, newStatus) => {
     try {
@@ -32,10 +51,15 @@ export default function Admindash() {
       });
 
       if (response.ok) {
-        fetchApplications();
+        fetchApplications(); 
+      } else {
+        const errorData = await response.json();
+        console.error("Error updating status:", errorData.error);
+        alert(`Failed to update status: ${errorData.error}`);
       }
     } catch (err) {
       console.error("Error updating status:", err);
+      alert("An error occurred while updating status.");
     }
   };
 
@@ -68,16 +92,12 @@ export default function Admindash() {
             <h4>{applications.length}</h4>
           </div>
           <div className="admin-box">
-            <h2>Active Users</h2>
-            <h4>50</h4>
+            <h2>Total Jobs Posted</h2>
+            <h4>{totalJobsPostedCount}</h4>
           </div>
           <div className="admin-box">
-            <h2>Jobs Posted</h2>
-            <h4>25</h4>
-          </div>
-          <div className="admin-box">
-            <h2>Application</h2>
-            <h4>Trends</h4>
+            <h2>Pending Review</h2>
+            <h4>{pendingReviewCount}</h4>
           </div>
         </div>
 

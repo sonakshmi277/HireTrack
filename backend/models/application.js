@@ -14,6 +14,8 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     default: "Pending"
   }
+},{
+  timestamps:true
 });
 
 module.exports = mongoose.model("Application", applicationSchema);
