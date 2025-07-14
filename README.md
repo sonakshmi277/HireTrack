@@ -1,13 +1,24 @@
-📌 Hiretrack – Job Application Tracker Hiretrack is a full-stack web application designed to simplify and streamline your job search journey. Track applications, manage deadlines, and stay on top of every opportunity — all in one place.
+# HireTrack – Job Application Tracker
+HireTrack is a full-stack web application that simplifies your job hunt.
+Track applications, manage your resumes, chat with admins, and even automate parts of your application process — all from a single seamless platform.
 
-🚀 Key Features
-🔐 Authentication (JWT/Firebase) – Secure login and signup
-📄 Job CRUD – Create, update, delete, and view job applications
-🔍 Search & Filter – Quickly locate applications based on status, company, etc.
-🤖 Auto Apply – Automate applications using Selenium
+## Features
 
-🛠️ Tech Stack
-##### Frontend: React.js
-##### Backend: Node.js, Express
-##### Database: MongoDB
-##### Extras: Selenium
+| Feature               | Description                                                  |
+|------------------------|--------------------------------------------------------------|
+| **Authentication**     | Secure user registration & login (JWT)                       |
+| **Resume Upload**      | Upload resumes in PDF/Word formats                           |
+| **Apply for Jobs**     | Apply to jobs listed on the platform                         |
+| **Track Applications** | View submitted applications & their statuses                |
+| **Admin Dashboard**    | Admin reviews applications & updates status                 |
+| **Real-Time Chat**     | Chat between applicants & admin powered by Socket.IO         |
+| **Automation**         | Selenium auto-fills & streamlines application submissions   |
+| **Multi-User Support** | Many jobseekers can use this platform simultaneously (1 admin for now)    |
+
+
+
+## Tech Stack
+#### Frontend: React.js
+#### Backend: Node.js, Express.js
+#### Database: MongoDB
+#### Extras: Socket.IO (real-time chat), Multer (file uploads), Selenium (automation)
