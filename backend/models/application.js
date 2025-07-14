@@ -7,16 +7,17 @@ const applicationSchema = new mongoose.Schema({
   education: String,
   jobId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Job"
+    ref:"Job"
   },
   resume: String,
   status: {
     type: String,
-    default: "Pending"
+    default:"Pending"
   }
 },{
   timestamps:true
 });
+
 
 module.exports = mongoose.model("Application", applicationSchema);
 
