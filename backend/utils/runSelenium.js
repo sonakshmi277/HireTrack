@@ -17,7 +17,8 @@ async function runSelenium(user) {
     } catch (error) {
         console.error("Error in runSelenium:", error);
         throw error;
-    } finally {
+    } 
+    finally {
         if (driver) {
             await driver.quit();
             console.log("Selenium driver quits");
