@@ -144,7 +144,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
         console.log("User exists in users_info.");
 
         if (updateExisting === 'true') {
-            console.log("User chose to update data. Updating UserInfo with new form data.");
+            console.log("User chose to update data.Updating UserInfo with new form data.");
             existingUser.Name = name || existingUser.Name;
             existingUser.Age = age || existingUser.Age;
             existingUser.Education = education || existingUser.Education;
@@ -158,7 +158,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
             await existingUser.save();
             console.log("UserInfo updated:", existingUser);
         } else {
-            console.log("User chose to auto-fill. Updating JobType for existing user (only if different).");
+            console.log("User chose to auto-fill.Updating JobType for existing user");
             if (existingUser.JobType !== jobId) {
                 existingUser.JobType = jobId;
                 await existingUser.save();
@@ -178,7 +178,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
             status: "Pending"
         });
         console.log("New application entry created for existing user:", application);
-        console.log("Running Selenium to auto-fill and submit for existing user...");
+        console.log("Running Selenium to auto-fill and submit for existing user.");
         try {
             await runSelenium(existingUser);
             console.log("Selenium auto-fill completed successfully.");

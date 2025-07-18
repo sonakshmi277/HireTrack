@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Message = require("../models/message");
 const JobSeeker = require("../models/jobseeker"); 
+
 router.get("/user_search", async (req, res) => {
   try {
     const query = req.query.query || "";
