@@ -116,7 +116,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
             if (!req.file) {
                 return res.status(400).json({ error: "Resume is required for new applicants." });
             }
-            console.log("New user, inserting into users_info and applications...");
+            console.log("New user, inserting into users_info and applications.");
             const user = await UserInfo.create({
                 Name: name,
                 Email: email,
@@ -144,7 +144,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
         console.log("User exists in users_info.");
 
         if (updateExisting === 'true') {
-            console.log("User chose to update data. Updating UserInfo with new form data...");
+            console.log("User chose to update data. Updating UserInfo with new form data.");
             existingUser.Name = name || existingUser.Name;
             existingUser.Age = age || existingUser.Age;
             existingUser.Education = education || existingUser.Education;
@@ -158,7 +158,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
             await existingUser.save();
             console.log("UserInfo updated:", existingUser);
         } else {
-            console.log("User chose to auto-fill. Updating JobType for existing user (only if different)...");
+            console.log("User chose to auto-fill. Updating JobType for existing user (only if different).");
             if (existingUser.JobType !== jobId) {
                 existingUser.JobType = jobId;
                 await existingUser.save();
@@ -187,7 +187,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
             return res.status(500).json({ error: "Application automation failed. Please try again manually.", details: seleniumErr.message });
         }
 
-        return res.status(200).json({ message: "Application auto-submitted successfully! 🎉", application });
+        return res.status(200).json({ message: "Application auto-submitted successfully!", application });
 
     } catch (err) {
         console.error("Apply route error:", err);

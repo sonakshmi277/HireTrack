@@ -1,7 +1,4 @@
 const { Builder, By } = require("selenium-webdriver");
-const fs = require("fs");
-const path = require("path");
-
 async function runSelenium(user) {
     let driver;
     try {
