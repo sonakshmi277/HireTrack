@@ -30,13 +30,8 @@ export default function Frontpg() {
       if (!user || !user.email) return;
       const role = sessionStorage.getItem("selectedRole") || "job_searcher";
       try {
-        // ✅ Fetch JWT token from Auth0
         const token = await getAccessTokenSilently();
-
-        // ✅ Save token in sessionStorage for this tab only
         sessionStorage.setItem("jwtToken", token);
-
-        // ✅ Send user details + token to backend
         const response = await axios.post(
           "http://localhost:5000/task_save",
           {
